@@ -1,1 +1,21 @@
-<p>grafica1 works!</p>
+<div class="row">
+    <div class="col-6">
+        <app-donat title="Ventas"></app-donat>
+    </div>
+
+    <div class="col-6">
+        <app-donat title="Compras" [labels]="labels1" [data]="data1"></app-donat>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <app-donat title="Incomes" [labels]="labels2" [data]="data2"></app-donat>
+    </div>
+
+    <div class="col-6">
+        <app-donat title="Taxes" [labels]="labels3" [data]="data3"></app-donat>
+    </div>
+
+</div>
