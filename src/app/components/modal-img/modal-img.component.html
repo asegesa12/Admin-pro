@@ -1,0 +1,29 @@
+<div class="fondo-modal" [class.ocultar]="ModalService.Hide">
+    <div id="responsive-modal" class="modal fade show" tabindex="-1" role="dialog" style="display: block;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Load Image</h4>
+                    <button type="button" (click)="CloseModal()" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <h3>Select an Image</h3>
+
+                    <div class="text-center">
+                        <img *ngIf="!imgTemp" class="avatar img-circle" [src]="ModalService.img" alt="">
+                        <img *ngIf="imgTemp" class="avatar img-circle" [src]="imgTemp" alt="">
+                    </div>
+
+
+                    <input type="file" (change)="changeImage( $event )" accept="image/x-png,image/gif,image/jpeg">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="CloseModal()" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+                    <button type="button" (click)="UploadImage()" class="btn btn-danger waves-effect waves-light">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

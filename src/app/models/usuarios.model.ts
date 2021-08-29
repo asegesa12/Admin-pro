@@ -21,14 +21,21 @@ export class Usuario {
     get ImageUrl(): string{
 
             // Img from Google
-        if ( this.img?.includes('https')){
+
+        if( !this.img){
+            return `${BASE_URL}/upload/usuarios/no-image`;
+
+        } else if (this.img?.includes('https')) {
+
             return this.img;
-        }
-            // Img Without google
-        if (this.img) {
+
+        } else if(this.img) {
+
             return `${BASE_URL}/upload/usuarios/${this.img}`;
+            
         } else {
             return `${BASE_URL}/upload/usuarios/no-image`;
         }
+      
     }
 }

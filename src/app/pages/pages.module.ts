@@ -18,6 +18,12 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { FormsModule } from '@angular/forms';
+
+import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
+import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
+import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
+
 
 
 
@@ -30,7 +36,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     AccountSettingsComponent,
     PromesasComponent,
     RxjsComponent,
-    PerfilComponent
+    PerfilComponent,
+    UsuariosComponent,
+    MedicosComponent,
+    HospitalesComponent
   ],
 
   exports: [
@@ -49,7 +58,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     AppRoutingModule,
     ComponentsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
 
   ]
 })

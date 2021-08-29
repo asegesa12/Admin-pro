@@ -9,6 +9,7 @@ import { RegisterForm } from '../interfaces/register-form.interface';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { Usuario } from '../models/usuarios.model';
+import { CargarUsuarios } from '../interfaces/cargar-usuarios.interface';
 
 const BASE_URL = environment.base_url;
 declare const gapi: any;
@@ -34,6 +35,14 @@ export class UsuarioService {
 
   get uid(){
     return this.usuario.uid || '';
+  }
+
+  get headers(){
+    return {
+      headers: {
+        'x-token': this.token
+      }
+    };
   }
 
 
@@ -84,12 +93,12 @@ export class UsuarioService {
   // tslint:disable-next-line: typedef
   updateProfile(data: {email: string, nombre: string, role: any}) {
 
-       data = {
+    data = {
       ...data,
       role: this.usuario.role
     };
 
-       return this.http.put(`${BASE_URL}/usuarios/${this.uid}`, data, {
+    return this.http.put(`${BASE_URL}/usuarios/${this.uid}`, data, {
       headers: {
         'x-token': this.token
       }
@@ -136,6 +145,39 @@ export class UsuarioService {
          catchError( err => of(false))
     );
 
+  }
+
+  cargarUsuarios( desde: number = 0 ){
+
+    return this.http.get<CargarUsuarios>(`${BASE_URL}/usuarios?desde=${ desde}`, this.headers )
+        .pipe(
+
+          // Esto transforma una arreglo de objetos a un arreglo  de usuarios.
+
+          map( resp => {
+            const usuarios = resp.usuarios.map(
+              user => new Usuario(user.nombre, user.email, '', user.google, user.img, user.uid,
+                user.role
+              )
+            );
+
+            return {
+              total: resp.total,
+              usuarios
+            };
+
+          })
+        );
+  }
+
+  RemoveUserService( usuario: Usuario){
+
+    return this.http.delete(`${BASE_URL}/usuarios/${usuario.uid}`, this.headers);
+  }
+
+  changeUser(data: Usuario) {
+
+    return this.http.put(`${BASE_URL}/usuarios/${data.uid}`, data, this.headers);
   }
 
 }

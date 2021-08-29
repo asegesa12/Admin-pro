@@ -16,3 +16,30 @@
     height: 200px;
     width: 200px;
 }
+
+.w100 {
+    width: 100px;
+}
+
+.w140 {
+    width: 140px;
+}
+
+.img-avatar {
+    border-radius: 100%;
+    width: 50px;
+}
+
+.ocultar {
+    display: none;
+}
+
+.fondo-modal {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0%;
+    left: 0%;
+    z-index: 9999;
+}
