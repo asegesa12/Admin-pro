@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Medic</h4>
+                <h6 class="card-subtitle">Update Information</h6>
+                <form class=" form-material form-horizontal-10" [formGroup]="medicoForm" (ngSubmit)="saveMedic()">
+
+                    <div class="form-group row" *ngIf="medicoSelecionado">
+                        <label for="exampleInputuname">Profile Picture</label>
+                        <div class="col-sm-9">
+
+                            <div class="input-group">
+                                <img [src]="medicoSelecionado.img |imagen:'medicos'" class="w200">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputuname">Name</label>
+                        <div class="input-group">
+                            <div class="input-group-addon mr-1"><i class="ti-user"></i></div>
+                            <input type="text" class="form-control" formControlName="nombre" id="exampleInputuname" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Hospital</label>
+                        <div class="input-group">
+                            <select name="" id="" formControlName="hospital" class="form-control">
+                                <option value="">Select Hospital</option>
+                                <option *ngFor="let hospital of hospitales" [value]="hospital._id">{{hospital.nombre}}
+                                </option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" [disabled]="medicoForm.invalid" class="btn btn-success waves-effect waves-light m-r-10"><i class="fa fa-save"> Save
+                        </i></button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col animated fadeIn slow" *ngIf="SelectHospital">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">Hospital</div>
+                <div class="card-subtitle">{{SelectHospital.nombre}}</div>
+
+                <div class="form-group row">
+                    <label for="exampleInputuname">Profile Picture</label>
+                    <div class="col-sm-9">
+
+                        <div class="input-group">
+                            <img [src]="SelectHospital.img |imagen:'hospitales'" class="img-thumbnail">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

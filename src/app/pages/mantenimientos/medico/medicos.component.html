@@ -20,30 +20,32 @@
     </div>
 </div>
 
-<div class="row" *ngIf="!loading">
+<div class="row fadeIn fast" *ngIf="!loading">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
 
                 <div class="row">
                     <div class="col-8">
-                        <h4 class="card-title">Hospitals</h4>
-                        <h6 class="card-subtitle"> Hospital Registered: {{total}}
+
+                        <h4 class="card-title">Medicos</h4>
+                        <h6 class="card-subtitle"> Medicos Registrados: {{total}}
                         </h6>
-
                     </div>
-
                     <div class="col">
                         <div class="text-right">
-                            <button (click)="CreateHospital()" class="btn btn-primary">
-                                <i class="fa fa-hospital-o">
-                                    Create Hospital
+                            <button routerLink="/dashboard/medico/nuevo" class="btn btn-primary">
+                                <i class="fa fa-medic-o">
+                                    Create Medic
                                 </i>
                             </button>
                         </div>
                     </div>
-
                 </div>
+
+
+
+
 
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -56,21 +58,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let hospital of hospital">
+                            <tr *ngFor="let medics of Medico">
                                 <td class="text center">
-                                    <img [src]="hospital.img | imagen:'hospitales'" class="img-avatar cursor" [alt]="hospital.nombre" (click)="showModal(hospital)">
+                                    <img [src]="medics.img | imagen:'medicos'" class="img-avatar cursor" [alt]="medics.nombre" (click)="showModal(medics)">
                                 </td>
-                                <td>
-
-                                    <input type="text" class=" text-secondary w-75 form-control-line " placeholder="Hospital" [(ngModel)]="hospital.nombre" />
-
-                                </td>
-
-
-
+                                <td>{{medics.nombre}}</td>
                                 <td class="text-nowrap text-center">
-                                    <a (click)="updateHospital(hospital)" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10 cursor"></i> </a>
-                                    <a (click)="DeleteHospital(hospital)" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger cursor"></i> </a>
+                                    <a [routerLink]="['/dashboard','medico', medics._id]" data-toggle="tooltip" data-original-title="Edit"> <i class="cursor fa fa-pencil text-inverse m-r-10"></i> </a>
+                                    <a (click)="Deletemedic(medics)" data-toggle="tooltip" data-original-title="Delete">
+                                        <i class=" fa fa-close text-danger cursor"></i> </a>
                                 </td>
                             </tr>
 
@@ -78,8 +74,8 @@
                     </table>
                 </div>
 
-                <button [disabled]="desde < 2" (click)="paginacion(-2)" class="btn btn-secondary mr-2">Anterior</button>
-                <button [disabled]="desde + 2 >= total" (click)="paginacion(2)" class="btn btn-secondary">Siguiente</button>
+                <button [disabled]="desde < 4" (click)="paginacion(-4)" class="btn btn-secondary mr-2">Anterior</button>
+                <button [disabled]="desde + 4 >= total" (click)="paginacion(4)" class="btn btn-secondary">Siguiente</button>
 
             </div>
         </div>

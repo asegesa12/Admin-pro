@@ -22,6 +22,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
   public desde = 0;
   public loading!: boolean;
   public ImgSubs! : Subscription;
+ 
 
 
 
@@ -125,7 +126,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
 
     return this.busquedaService.busqueda('usuarios', termino)
       .subscribe(resp => {
-          this.usuarios = resp;
+          this.usuarios = resp as Usuario[];
       });
 
   }

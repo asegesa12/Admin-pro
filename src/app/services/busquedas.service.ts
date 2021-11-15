@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Usuario } from '../models/usuarios.model';
+import { Hospital } from '../models/hospitals.model';
 
 
 
@@ -44,7 +45,7 @@ export class BusquedasService {
   }
 
   // tslint:disable-next-line: typedef
-  private TransformHospital(results: any[]) {
+  private TransformHospital(results: any[]): Hospital[] {
 
     return results;
   }
@@ -59,6 +60,14 @@ export class BusquedasService {
             case 'usuarios':
               console.log(resp.resultados);
               return this.TransformUsers(resp.resultados);
+
+            case 'hospitales':
+              console.log(resp.resultados);
+              return this.TransformHospital(resp.resultados);
+
+            case 'medicos':
+              console.log(resp.resultados);
+              return this.TransformMedics(resp.resultados);
 
             default:
               return [];

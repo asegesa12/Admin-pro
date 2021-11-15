@@ -1,5 +1,5 @@
 <div class="row animated fadeIn fast">
-    <div class="col-12">
+    <div class="col-lg-8">
         <div class="card">
             <div class="card-body">
                 <form class="form-material">
@@ -21,12 +21,13 @@
     </div>
 </div>
 
+
 <div class="row fadeIn fast" *ngIf="!loading">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
 
-                <h4 class="card-title">Users</h4>
+                <h4 class="card-title">Users: {{total}}</h4>
                 <h6 class="card-subtitle">List of users opend by customers</h6>
 
                 <!-- <div class="box bg-info text-center col-2 mt-1 mb-2">
@@ -45,9 +46,10 @@
                                 <th class="text-nowrap">Action</th>
                             </tr>
                         </thead>
+
                         <tbody>
                             <tr *ngFor="let user of usuarios">
-                                <td class="text center">
+                                <td class="text-center">
                                     <img [src]="user.ImageUrl" alt="" (click)="showModal(user)" class="img-avatar cursor">
                                 </td>
                                 <td>{{user.email}}</td>
@@ -71,6 +73,15 @@
 
                         </tbody>
                     </table>
+                </div>
+
+                <div class="row fadeIn fast" *ngIf="usuarios.length === 0">
+                    <div class="col-12">
+                        <div class="alert alert-success text-center">
+                            <h4 class="alert-heading">NADA</h4>
+
+                        </div>
+                    </div>
                 </div>
 
                 <div *ngIf="txtBuscar.value.length === 0">
