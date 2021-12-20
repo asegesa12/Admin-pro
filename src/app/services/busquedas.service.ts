@@ -30,6 +30,11 @@ export class BusquedasService {
     };
   }
 
+  // tslint:disable-next-line: typedef
+  busquedaGlobal(termino: string){
+    return this.http.get(`${BASE_URL}/todo/${ termino }`, this.headers);
+  }
+
   private TransformUsers(results: any[]): Usuario[] {
 
     return results.map(

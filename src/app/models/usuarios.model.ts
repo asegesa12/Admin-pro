@@ -10,7 +10,7 @@ export class Usuario {
         public email: string,
         public password?: string,
         public google?: boolean,
-        public img?: string,
+        public img?: 'ADMIN_ROLE' | 'USER_ROLE',
         public uid?: string,
         public role?: string,
 
@@ -18,7 +18,7 @@ export class Usuario {
     ){}
 
 
-    get ImageUrl(): string{
+     get ImageUrl(): string{
 
             // Img from Google
 

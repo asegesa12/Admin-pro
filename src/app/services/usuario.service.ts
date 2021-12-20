@@ -33,16 +33,28 @@ export class UsuarioService {
     return localStorage.getItem('token') || '';
   }
 
+  get role(): string | undefined{
+    return this.usuario.role;
+  }
+
+
+  // tslint:disable-next-line: typedef
   get uid(){
     return this.usuario.uid || '';
   }
 
+  // tslint:disable-next-line: typedef
   get headers(){
     return {
       headers: {
         'x-token': this.token
       }
     };
+  }
+
+  saveLocalStorage(token: string, menu: any){
+    localStorage.setItem('token', token);
+    localStorage.setItem('menu', JSON.stringify(menu));
   }
 
 
@@ -72,6 +84,7 @@ export class UsuarioService {
   // tslint:disable-next-line: typedef
   logout(){
     localStorage.removeItem('token');
+    localStorage.removeItem('menu');
     this.auth2.signOut().then( () => {
       this.ngZone.run( () => {
         this.router.navigateByUrl('/login');
@@ -85,7 +98,8 @@ export class UsuarioService {
     return this.http.post(`${BASE_URL }/usuarios`, formData)
       .pipe(
         tap((resp: any) => {
-          localStorage.setItem('token', resp.token);
+          this.saveLocalStorage(resp.token, resp.menu);
+
         })
       );
   }
@@ -110,7 +124,8 @@ export class UsuarioService {
     return this.http.post(`${BASE_URL}/login`, formData)
               .pipe(
                 tap( (resp: any ) => {
-                      localStorage.setItem('token', resp.token);
+                  this.saveLocalStorage(resp.token, resp.menu);
+                      
                 })
               );
   }
@@ -120,7 +135,8 @@ export class UsuarioService {
     return this.http.post(`${BASE_URL}/login/google`, { token })
       .pipe(
         tap((resp: any) => {
-          localStorage.setItem('token', resp.token);
+          this.saveLocalStorage(resp.token, resp.menu);
+         
         })
       );
   }
@@ -139,7 +155,7 @@ export class UsuarioService {
         const { email, google, nombre, role, img = '', uid  } = resp.usuario;
 
         this.usuario = new Usuario(nombre, email, '' , google , img, uid, role);
-        localStorage.setItem('token', resp.token);
+        this.saveLocalStorage(resp.token, resp.menu);
         return true;
       }),
          catchError( err => of(false))
